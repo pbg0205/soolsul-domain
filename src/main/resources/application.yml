@@ -1,0 +1,75 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/soolsul
+    username: soolsul-user
+    password: 20221201
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  redis:
+    host: localhost
+    port: 6379
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true # 추후 초기화 데이터 삽입용
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:sql/data.sql
+logging:
+  level:
+    com.soolsul.soolsulserver: debug
+
+jwt:
+  expire-length: 1800000 # 30min
+  refresh-length: 86400000 # 1day
+  access:
+    private:
+      MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAuODLt1+2EB1mKHd1
+      cqP5Cwc0eC4jnuznnS3TIBTdau7SHIqUJeC6Snmu5Eh15oBBfV/aD/8T81LKnjH8
+      RwslCwIDAQABAkA/HoiOv7+h+teRA0/25uK1EC2qxl3k+Y8OC8IkFtuNkQwG+WNf
+      7i05kquWNwTzwFNvwoIYujSfGy2OKhjUlMj5AiEA+OcUBx9yWMo9NIH6/bR/qBhH
+      H7Q9jP5LvCoM5HaB1FcCIQC+JlsTg7I0DwxanNo6/J0mH1bhBBmzm++mvtaDkqSk
+      bQIgLulenPkQVCvJ3VuiMq8SYFwzC4atEyXaoFxMkcLENYECIEx1P8no+o7UPjNx
+      Po7ZZJcfot93tp3x5bs2oSrmnC1BAiEA4m9Gfv+KDazDYC4J5Sm0mEG8F40xWlCu
+      Q9U+hUuK5Kw=
+  refresh:
+    private:
+      MIIBVAIBADANBgkqhkiG9w0BAQEFAASCAT4wggE6AgEAAkEAhkZSIBQLI8HtQXOL
+      ioAezKkqoqQTubAc4JdPsfToIzlFXMDPVTxyW34weBFuDnFm9ylPIc+XLknAeufX
+      nho0+QIDAQABAkBfj9iO//TVpATo2gTrszc4TQUM710igFZs+QM9EaHMvrs/Z+CF
+      vSGGuUt9m2yCl+gx0XZ0aPlYQahaP5g1VX+pAiEA7ytsmVYOYaeCEICSvszbfPUa
+      TMeU17NKURauandnZB8CIQCPuT4rRi69J/oMiwjoxAw2HVxi3W63LMeOw9NH3g2D
+      5wIgVvQvuJPsCJ8RD5TfRVVPm1+1XyLUv5NkupSHdxfQVDsCIBM+Y2OZ7xImsyVQ
+      zG2WKmhogAFA0t014rZr4/NAeSDLAiEA0+SpdBmmaUvKOgptFuJ3d3Zphqrrc3Tc
+      yEreggkRiG0=
+
+springdoc:
+  version: v.1.0.0
+  packages-to-scan: com.soolsul.soolsulserver
+  swagger-ui:
+    path: /swagger-ui
+    tags-sorter: alpha
+    operations-sorter: alpha
+  api-docs:
+    path: /v1/api-docs
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+
+aws:
+  s3:
+    images:
+      bucket:
+        name: soolsul-image-bucket
+      region:
+        name: ap-northeast-2
+      endpoint:
+        url: https://soolsul-image-bucket.${aws.s3.images.region.name}.amazonaws.com/
+    credentials:
+      access:
+        key: test
+      secret:
+        key: test
